@@ -43,18 +43,7 @@
       <div class="card card-cadastro">
         <h2>CADASTRO</h2>
         <div class="formulario">
-<<<<<<< Updated upstream
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-          <div class="campo">
-            <span>Código de ativação:</span>
-            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-          </div>
-=======
           <!-- Campos do formulário -->
->>>>>>> Stashed changes
           <div class="campo">
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
@@ -109,23 +98,11 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-<<<<<<< Updated upstream
-    var codigoVar = codigo_input.value;
-    var idEmpresaVincular
-
-    // Verificando se há algum campo em branco
-=======
->>>>>>> Stashed changes
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-<<<<<<< Updated upstream
-      confirmacaoSenhaVar == "" ||
-      codigoVar == ""
-=======
       confirmacaoSenhaVar == ""
->>>>>>> Stashed changes
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -161,12 +138,7 @@
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         emailServer: emailVar,
-<<<<<<< Updated upstream
-        senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular
-=======
         senhaServer: senhaVar
->>>>>>> Stashed changes
       }),
     })
       .then(function (resposta) {
@@ -196,29 +168,6 @@
     return false;
   }
 
-<<<<<<< Updated upstream
-  // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
-
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
-=======
->>>>>>> Stashed changes
   function sumirMensagem() {
     cardErro.style.display = "none";
   }

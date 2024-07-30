@@ -9,12 +9,12 @@ const titlesQuizData = [
         correct: "a" // Resposta correta
     },
     {
-        question: "Quantos Campeonatos Brasileiros o Palmeiras venceu até 2023?",
-        a: "8",
-        b: "9",
-        c: "10",
-        d: "11",
-        correct: "c"
+        question: "Quantos Campeonatos Brasileiros o Palmeiras?",
+        a: "6",
+        b: "10",
+        c: "11",
+        d: "12",
+        correct: "d"
     },
     {
         question: "Em que ano o Palmeiras venceu o Mundial de Clubes?",
@@ -25,12 +25,12 @@ const titlesQuizData = [
         correct: "a"
     },
     {
-        question: "Quantas Copas do Brasil o Palmeiras venceu até 2023?",
+        question: "Quantas Copas do Brasil o Palmeiras venceu?",
         a: "3",
         b: "4",
         c: "5",
         d: "6",
-        correct: "c"
+        correct: "b"
     },
     {
         question: "Qual é o estádio oficial do Palmeiras?",
