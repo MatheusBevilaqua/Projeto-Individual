@@ -2,18 +2,66 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
     margin: 0;
     background-color: #1C4D27;
 }
 
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: #F6EEDF;
+    padding: 20px 0;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed; /* Fixa a navegação no lado esquerdo */
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #F6EEDF;
+    padding: 20px;
+}
+
+.nav ul {
+    list-style-type: none;
+    width: 100%;
+    text-align: left;
+}
+
+.nav ul li {
+    margin: 15px 0;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    padding: 10px 15px;
+    display: block;
+    width: 75%;
+    transition: background-color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    background-color: #00790e;
+}
+
 .lobby-container {
     text-align: center;
-    background-color: #1C4D27;
+    background-color: #F6EEDF;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 400px; /* Espaço para a nav fixa */
 }
 
 h1 {
@@ -27,7 +75,7 @@ h1 {
 }
 
 .game-item {
-    background-color: #1C4D27;
+    background-color: #ecdec3;
     padding: 15px;
     border-radius: 5px;
 }
