@@ -15,4 +15,9 @@ router.get("/tempo-real/:idAquario", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })
 
+router.post("/cadastrar/pontos", function (req, res) {
+    medidaController.cadastrarPontos(req, res);
+})
+
+
 module.exports = router;

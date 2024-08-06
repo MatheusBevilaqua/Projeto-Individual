@@ -45,8 +45,17 @@ function cadastrarQuiz(score,idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function cadastrarPontos(score, fkUsuario, tempo) {
+    var instrucaoSql = `INSERT INTO Quiz (score, fkUsuario, tempo) VALUES 
+    (${score}, ${fkUsuario}, ${tempo})     
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   return database.executar(instrucaoSql);
+}
+
 module.exports = {
     cadastrarQuiz,
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    cadastrarPontos
 }
