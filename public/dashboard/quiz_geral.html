@@ -48,7 +48,6 @@
     </form>
     <div id="result"></div>
   </div>
-  <script src="script.js"></script>
 
   <div id="timer" class=""></div>
 </body>
@@ -57,8 +56,13 @@
 
 
 <script>
+  var tempo = 0; 
+
   function checkAnswers () {
     stopTimer();
+
+    console.log(tempo)
+
     setTimeout(function () {
       window.location = "tela_jogos.html";
     }, 3500)
@@ -114,6 +118,7 @@
       const timer = document.getElementById('timer');
       const currentTime = +timer.innerHTML;
       timer.innerHTML = currentTime + 1;
+      tempo ++;
     }, 1000);
   };
 
