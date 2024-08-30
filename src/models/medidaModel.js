@@ -1,3 +1,4 @@
+const { cadastrarPontos3 } = require("../controllers/medidaController");
 var database = require("../database/config");
 
 function buscarUltimasMedidas() {
@@ -45,7 +46,7 @@ function cadastrarQuiz(score,idUsuario) {
     return database.executar(instrucaoSql);
 }
 
-function cadastrarPontos(score, fkUsuario, tempo) {
+function cadastrarPontos1(score, fkUsuario, tempo) {
     var instrucaoSql = `INSERT INTO Quiz (score, fkUsuario, tempo) VALUES 
     (${score}, ${fkUsuario}, ${tempo})     
     `
@@ -53,9 +54,52 @@ function cadastrarPontos(score, fkUsuario, tempo) {
    return database.executar(instrucaoSql);
 }
 
+function cadastraridolo( fkUsuario, idolo) {
+    var instrucaoSql = `INSERT INTO Quiz2 (idolo, fkUsuario) VALUES 
+    ('${idolo}', ${fkUsuario})     
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   return database.executar(instrucaoSql);
+}
+
+function cadastrarPontos2( fkUsuario, acertos) {
+    var instrucaoSql = `INSERT INTO Quiz3 (acertos, fkUsuario) VALUES 
+    (${acertos}, ${fkUsuario})     
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   return database.executar(instrucaoSql);
+}
+
+function linhaIdolo() {
+    var instrucaoSql = ` SELECT idolo FROM Quiz2;`
+    return database.executar(instrucaoSql)
+}
+
+function linhaGeral() {
+    var instrucaoSql = ` SELECT 
+    u.id AS usuario_id,
+    u.nome AS nome_usuario,  -- Supondo que a tabela 'usuario' tenha uma coluna 'nome'
+    q.score,
+    q.tempo
+FROM 
+    Quiz q
+JOIN 
+    usuario u ON q.fkUsuario = u.id
+    ORDER BY 
+    q.tempo ASC
+LIMIT 
+    10;`
+    return database.executar(instrucaoSql)
+}
+
+
 module.exports = {
     cadastrarQuiz,
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    cadastrarPontos
+    cadastrarPontos1, 
+    cadastraridolo,
+    cadastrarPontos2,
+    linhaIdolo,
+    linhaGeral
 }

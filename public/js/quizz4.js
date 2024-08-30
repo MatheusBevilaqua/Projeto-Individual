@@ -102,10 +102,35 @@ function showResults() {
 
     // Mostra o número de respostas corretas
     resultsContainer.innerHTML = `${numCorrect} de ${titlesQuizData.length} questões corretas.`;
+
+    fetch("/medidas/cadastrar/pontos2", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            fkUsuarioServer: sessionStorage.ID_USUARIO,
+            acertosServer: numCorrect
+        })
+    })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+    
+            if (resposta.ok) {
+                setTimeout(() => {
+                    window.location = "tela_jogos.html";
+                }, "2000");
+            } else {
+                alert('Erro');
+            }
+        })
 }
+
+
 
 // Constrói o quiz ao carregar a página
 buildQuiz();
+
 
 // Adiciona um evento ao botão de submit para mostrar os resultados
 submitButton.addEventListener('click', showResults);

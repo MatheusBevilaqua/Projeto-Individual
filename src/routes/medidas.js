@@ -16,8 +16,23 @@ router.get("/tempo-real/:idAquario", function (req, res) {
 })
 
 router.post("/cadastrar/pontos", function (req, res) {
-    medidaController.cadastrarPontos(req, res);
+    medidaController.cadastrarPontos1(req, res);
 })
 
+router.post("/cadastrar/idolo", function (req, res) {
+    medidaController.cadastraridolo(req, res);
+})
+
+router.get("/dados/linhaIdolo", function (req, res) {
+    medidaController.linhaIdolo(req, res);
+})
+
+router.get("/dados/linhaGeral", function (req, res) {
+    medidaController.linhaGeral(req, res);
+})
+
+router.post("/cadastrar/pontos2", function (req, res) {
+    medidaController.cadastrarPontos2(req, res);
+})
 
 module.exports = router;
