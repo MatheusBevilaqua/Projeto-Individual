@@ -6,7 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz do Palmeiras geral</title>
-  <link rel="stylesheet" href="stylequiz.css">
   <link rel="stylesheet" href="../css/quiz.css">
 </head>
 
@@ -47,6 +46,7 @@
       <button type="button" onclick="checkAnswers()">Enviar Respostas</button>
     </form>
     <div id="result"></div>
+    <div><a href="./tela_jogos.html">Voltar</a></div>
   </div>
 
   <div id="timer" class=""></div>
@@ -86,7 +86,7 @@
     result.textContent = `Você acertou ${score} de ${Object.keys(answers).length} perguntas.`;
 
     
-    fetch("/medidas/cadastrar/pontos", {
+    fetch("/graficos/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

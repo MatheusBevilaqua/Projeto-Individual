@@ -9,7 +9,7 @@ function buscarUltimasMedidas() {
     WHERE score = 0)as zero,
     
     (SELECT count(score) FROM Quiz
-    WHERE score = 1)as um,
+    WHERE score = 1)as umponto,
     
     (SELECT count(score) FROM Quiz 
     WHERE score = 2)as dois,
@@ -19,20 +19,6 @@ function buscarUltimasMedidas() {
     
     (SELECT count(score) FROM Quiz 
     WHERE score = 4)as quatro;`;
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-function buscarMedidasEmTempoReal(idAquario) {
-
-    var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        FROM medida WHERE fk_aquario = ${idAquario} 
-                    ORDER BY id DESC LIMIT 1`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -48,7 +34,7 @@ function cadastrarQuiz(score,idUsuario) {
 
 function cadastrarPontos1(score, fkUsuario, tempo) {
     var instrucaoSql = `INSERT INTO Quiz (score, fkUsuario, tempo) VALUES 
-    (${score}, ${fkUsuario}, ${tempo})     
+    (${fkUsuario}, ${score}, ${tempo})     
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
    return database.executar(instrucaoSql);
@@ -78,11 +64,11 @@ function linhaIdolo() {
 function linhaGeral() {
     var instrucaoSql = ` SELECT 
     u.id AS usuario_id,
-    u.nome AS nome_usuario,  -- Supondo que a tabela 'usuario' tenha uma coluna 'nome'
+    u.nome AS nome_usuario,  
     q.score,
     q.tempo
 FROM 
-    Quiz q
+    Quiz as q
 JOIN 
     usuario u ON q.fkUsuario = u.id
     ORDER BY 
@@ -96,7 +82,6 @@ LIMIT
 module.exports = {
     cadastrarQuiz,
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal,
     cadastrarPontos1, 
     cadastraridolo,
     cadastrarPontos2,
