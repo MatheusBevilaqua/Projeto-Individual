@@ -92,8 +92,8 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        scoreServer: score,
         fkUsuarioServer: sessionStorage.ID_USUARIO,
+        scoreServer: score,
         tempoServer: tempo
       })
     })
@@ -102,7 +102,7 @@
 
         if (resposta.ok) {
           setTimeout(() => {
-            window.location = "dashboard.html";
+            window.location = "tela_jogos.html";
           }, "2000");
         } else {
           alert('Erro');

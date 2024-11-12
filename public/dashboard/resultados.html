@@ -1,107 +1,169 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RESULTADOS</title>
   <!-- Incluindo a biblioteca Chart.js para desenhar gráficos -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="icon" href="assets/palmeiras-1.svg" /> 
+  <link rel="icon" href="../assets/palmeiras-1.svg" />
+  <link rel="stylesheet" href="../css/resultados.css">
 </head>
-<body onload="listar()"> <!-- Chamando a função obterDados ao carregar a página -->
-  
-<!-- Título para o gráfico de linhas -->
-Gráfico do Quiz geral
-<div>
-  <!-- Elemento canvas onde o gráfico de linha será desenhado -->
-  <!-- <canvas id="linha"></canvas> -->
-  <!-- Elemento canvas onde o gráfico de barra será desenhado -->
-  <canvas id="barra"></canvas>
-</div>
+
+<body onload="listar(), buscarPorcentagem()">
+
+  <h1 style="align-items: center;">Resultados</h1>
+  Gráfico do Quiz geral (formato Ranking)
+  <div class="grafico">
+    <canvas id="barra"></canvas>
+  </div>
+  <br><br>
+  <div class="idols">
+    Ídolos mais selecionados:
+    <div class="card">Cesar Maluco </div>
+    <span id="cesar" ></span>%
+
+    <div class="card">Ademir da Guia</div>
+    <span id="ademir"></span>%
+
+    <div class="card">Dudu</div>
+    <span id="dudu"></span>%
+
+  </div>
+
+  <a href="./tela_jogos.html" style="color: #F6EEDF;">Voltar</a>
 
 </body>
+
 </html>
 <script>
 
+  function buscarPorcentagem() {
 
-function listar(){
-  // Aqui seria a função que obteria os dados do banco de dados
-  // No caso, aqui você colocaria o fetch que teria o endereço da sua rota que você criou na pasta /routes e chamaria a função plotarGraficoLinha nessa função. Exemplo:
- 
-   
-  fetch('/graficos/listar', {cache: 'no-store'}).then(function(response){
+    fetch('/graficos/porcentoIdolo', { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
 
-                    
-                    plotarGraficoLinha(resposta);
+          var total = resposta[0].votos + resposta[1].votos + resposta[2].votos
 
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+          var Ademir = (resposta[2].votos / total) * 100
+          var Dudu = (resposta[1].votos / total) * 100
+          var Cesar = (resposta[0].votos / total) * 100
+
+          cesar.innerHTML = Ademir.toFixed()
+          dudu.innerHTML = Dudu.toFixed()
+          ademir.innerHTML = Cesar.toFixed()
 
 
-}
-
-// Função para plotar o gráfico de linha
-function plotarGraficoLinha(resposta) {
-  console.log('iniciando plotagem do gráfico...');
-
-  // Verifique se a resposta contém pelo menos 3 elementos e se os campos esperados existem
-  if (resposta && resposta.length >= 3 && resposta[0] && resposta[1] && resposta[2]) {
-    let labels = resposta.map((item, index) => `Usuario ${index + 1}`);  // Criar labels com base nos usuários
-
-    let dados = {
-      labels: labels,
-      datasets: [
-        {
-          label: 'Score',
-          data: [],
-          fill: false,
-        }
-      ]
-    };
-
-    console.log('----------------------------------------------');
-    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":');
-    console.log(resposta);
-
-    // Use o campo "score" dos dados recebidos
-    resposta.forEach(item => {
-      dados.datasets[0].data.push(item.score);  // Adiciona o valor de "score" no gráfico
-    });
-
-    console.log('----------------------------------------------');
-    console.log('O gráfico será plotado com os respectivos valores:');
-    console.log('Labels:');
-    console.log(labels);
-    console.log('Dados:');
-    console.log(dados.datasets);
-    console.log('----------------------------------------------');
-
-    const config = {
-      type: 'bar',
-      data: dados,
-    };
-
-    let myChart = new Chart(document.getElementById('barra'), config);
-  } else {
-    console.error('Dados da resposta inválidos ou incompletos:', resposta);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
   }
-}
 
 
-let myChart = new Chart(
-    document.getElementById(`barra`),
-    config
-);
+  function listar() {
 
- 
+    fetch('/graficos/listar', { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGrafico(resposta);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function plotarGrafico(resposta) {
+    console.log('iniciando plotagem do gráfico...');
+
+    if (resposta && resposta.length >= 3 && resposta[0] && resposta[1] && resposta[2]) {
+      resposta.sort((a, b) => b.score - a.score);
+
+      let labels = resposta.map((item, index) => `Ranking ${index + 1}`);
+
+      let dados = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Score',
+            data: [],
+            fill: false,
+            borderColor: '#FFFFFF',
+            backgroundColor: '#FFFFFF',
+            borderWidth: 2,
+            pointBackgroundColor: '#FFFFFF',
+          }
+        ]
+      };
+
+      console.log('----------------------------------------------');
+      console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":');
+      console.log(resposta);
+
+      resposta.forEach(item => {
+        dados.datasets[0].data.push(item.score);
+      });
+
+      console.log('----------------------------------------------');
+      console.log('O gráfico será plotado com os respectivos valores:');
+      console.log('Labels:');
+      console.log(labels);
+      console.log('Dados:');
+      console.log(dados.datasets);
+      console.log('----------------------------------------------');
+
+      const config = {
+        type: 'bar',
+        data: dados,
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: '#FFFFFF',
+              },
+            },
+            x: {
+              ticks: {
+                color: '#FFFFFF',
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#FFFFFF',
+              },
+            },
+            tooltip: {
+              bodyColor: '#FFFFFF',
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            }
+          }
+        }
+      };
+
+      // Criando o gráfico
+      let myChart = new Chart(document.getElementById('barra'), config);
+    } else {
+      console.error('Dados da resposta inválidos ou incompletos:', resposta);
+    }
+  }
+
 </script>

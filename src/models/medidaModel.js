@@ -1,4 +1,3 @@
-const { cadastrarPontos3 } = require("../controllers/medidaController");
 var database = require("../database/config");
 
 function buscarUltimasMedidas() {
@@ -40,13 +39,18 @@ function cadastrarPontos1(score, fkUsuario, tempo) {
    return database.executar(instrucaoSql);
 }
 
-function cadastraridolo( fkUsuario, idolo) {
-    var instrucaoSql = `INSERT INTO Quiz2 (idolo, fkUsuario) VALUES 
-    ('${idolo}', ${fkUsuario})     
-    `
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-   return database.executar(instrucaoSql);
-}
+// function cadastraridolo( fkUsuario, idolo) {
+//     var instrucaoSql = `INSERT INTO Quiz2 (idolo, fkUsuario) VALUES 
+//     ('${idolo}', ${fkUsuario})     
+//     `
+//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+//    return database.executar(instrucaoSql);
+// }
+
+// function linhaIdolo() {
+//     var instrucaoSql = ` SELECT idolo FROM Quiz2;`
+//     return database.executar(instrucaoSql)
+// }
 
 function cadastrarPontos2( fkUsuario, acertos) {
     var instrucaoSql = `INSERT INTO Quiz3 (acertos, fkUsuario) VALUES 
@@ -54,11 +58,6 @@ function cadastrarPontos2( fkUsuario, acertos) {
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
    return database.executar(instrucaoSql);
-}
-
-function linhaIdolo() {
-    var instrucaoSql = ` SELECT idolo FROM Quiz2;`
-    return database.executar(instrucaoSql)
 }
 
 function linhaGeral() {
@@ -83,8 +82,8 @@ module.exports = {
     cadastrarQuiz,
     buscarUltimasMedidas,
     cadastrarPontos1, 
-    cadastraridolo,
     cadastrarPontos2,
-    linhaIdolo,
+    // cadastraridolo,
+    // linhaIdolo,
     linhaGeral
 }

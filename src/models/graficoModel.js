@@ -1,6 +1,7 @@
 var database = require("../database/config")
 
-function cadastrar(score, fkUsuario, tempo) {
+
+function cadastrar(fkUsuario, score, tempo) {
     var instrucao = `
         INSERT INTO Quiz (fkUsuario, score, tempo) VALUES 
     (${fkUsuario}, ${score}, ${tempo});    
@@ -28,7 +29,36 @@ LIMIT
     return database.executar(instrucao);
 }
 
+function cadastraridolo(fkUsuario, idolo) {
+    var instrucaoSql = `INSERT INTO Quizidolo (idolo, fkUsuario) VALUES 
+    ('${idolo}', ${fkUsuario})     
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function porcentoIdolo() {
+    var instrucaoSql = `SELECT idolo,
+    COUNT(idolo) as votos
+FROM Quizidolo GROUP BY idolo;
+`
+
+    //     var porcDudu = `SELECT 
+    //     (COUNT(*) / (SELECT COUNT(*) FROM Quizidolo)) * 100 AS porcentagem
+    // FROM Quizidolo
+    // WHERE idolo = 'Dudu';`
+
+    //     var porcAdemir = `SELECT 
+    //     (COUNT(*) / (SELECT COUNT(*) FROM Quizidolo)) * 100 AS porcentagem
+    // FROM Quizidolo
+    // WHERE idolo = 'Ademir da Guia';`
+
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     cadastrar,
-    listar
+    listar,
+    cadastraridolo,
+    porcentoIdolo
 };

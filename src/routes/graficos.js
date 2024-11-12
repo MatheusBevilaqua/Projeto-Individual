@@ -16,4 +16,12 @@ router.get("/listar", function (req, res) {
     graficoController.listar(req, res);
 });
 
+router.post("/cadastraridolo", function (req, res) {
+    graficoController.cadastraridolo(req, res);
+})
+
+router.get("/porcentoIdolo", function (req, res) {
+    graficoController.porcentoIdolo(req, res);
+})
+
 module.exports = router;

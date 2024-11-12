@@ -56,30 +56,13 @@ function cadastrarPontos1(req, res) {
     });
 }
 
-function cadastraridolo(req, res) {
-
-    var fkUsuario = req.body.fkUsuarioServer
-    var idolo = req.body.idoloServer
-
-    medidaModel.cadastraridolo(fkUsuario, idolo).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
 
 function cadastrarPontos2(req, res) {
-
+    
     var fkUsuario = req.body.fkUsuarioServer
     var acertos = req.body.acertosServer
-
-
+    
+    
     medidaModel.cadastrarPontos2(fkUsuario, acertos).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
@@ -93,20 +76,37 @@ function cadastrarPontos2(req, res) {
     });
 }
 
-function linhaIdolo(req, res) {
+// function cadastraridolo(req, res) {
 
-    medidaModel.linhaIdolo().then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    })
-}
+//     var fkUsuario = req.body.fkUsuarioServer
+//     var idolo = req.body.idoloServer
+
+//     medidaModel.cadastraridolo(fkUsuario, idolo).then(function (resultado) {
+//         if (resultado.length > 0) {
+//             res.status(200).json(resultado);
+//         } else {
+//             res.status(204).send("Nenhum resultado encontrado!")
+//         }
+//     }).catch(function (erro) {
+//         console.log(erro);
+//         console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+//         res.status(500).json(erro.sqlMessage);
+//     });
+// }
+// function linhaIdolo(req, res) {
+
+//     medidaModel.linhaIdolo().then(function (resultado) {
+//         if (resultado.length > 0) {
+//             res.status(200).json(resultado);
+//         } else {
+//             res.status(204).send("Nenhum resultado encontrado!")
+//         }
+//     }).catch(function (erro) {
+//         console.log(erro);
+//         console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+//         res.status(500).json(erro.sqlMessage);
+//     })
+// }
 
 function linhaGeral(req, res) {
 
@@ -127,8 +127,8 @@ module.exports = {
     cadastrarQuiz,
     buscarUltimasMedidas,
     cadastrarPontos1,
-    cadastraridolo,
     cadastrarPontos2,
-    linhaIdolo,
+    // cadastraridolo,
+    // linhaIdolo,
     linhaGeral
 }
