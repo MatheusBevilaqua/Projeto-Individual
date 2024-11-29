@@ -14,30 +14,41 @@
 <body onload="listar(), buscarPorcentagem()">
 
   <h1 style="align-items: center;">Resultados</h1>
-  Gráfico do Quiz geral (formato Ranking)
-  <div class="grafico">
-    <canvas id="barra"></canvas>
+  <p>Gráfico do Quiz geral (formato Ranking)</p>
+  <div class="father-barra-idols">
+    <div class="grafico">
+      <canvas id="barra"></canvas>
+    </div>
+    <br><br>
+    <div class="idols">
+      Ídolos mais selecionados:
+      <div class="card">Cesar Maluco </div>
+      <span id="cesar" ></span>%
+  
+      <div class="card">Ademir da Guia</div>
+      <span id="ademir"></span>%
+  
+      <div class="card">Dudu</div>
+      <span id="dudu"></span>%
+  
+    </div>
   </div>
-  <br><br>
-  <div class="idols">
-    Ídolos mais selecionados:
-    <div class="card">Cesar Maluco </div>
-    <span id="cesar" ></span>%
+  
 
-    <div class="card">Ademir da Guia</div>
-    <span id="ademir"></span>%
-
-    <div class="card">Dudu</div>
-    <span id="dudu"></span>%
-
+  <div class="link-space-back">
+    <button onclick="voltar()"> <span>Voltar</span>
+    </button>
+    <!-- <a href="./tela_jogos.html" style="color: #F6EEDF;" class="link-back">Voltar</a> -->
   </div>
-
-  <a href="./tela_jogos.html" style="color: #F6EEDF;">Voltar</a>
 
 </body>
 
 </html>
 <script>
+
+  function voltar(){
+    window.location.href="./tela_jogos.html"
+  }
 
   function buscarPorcentagem() {
 
@@ -56,8 +67,7 @@
           cesar.innerHTML = Ademir.toFixed()
           dudu.innerHTML = Dudu.toFixed()
           ademir.innerHTML = Cesar.toFixed()
-
-
+          
         });
       } else {
         console.error('Nenhum dado encontrado ou erro na API');

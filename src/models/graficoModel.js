@@ -42,17 +42,6 @@ function porcentoIdolo() {
     COUNT(idolo) as votos
 FROM Quizidolo GROUP BY idolo;
 `
-
-    //     var porcDudu = `SELECT 
-    //     (COUNT(*) / (SELECT COUNT(*) FROM Quizidolo)) * 100 AS porcentagem
-    // FROM Quizidolo
-    // WHERE idolo = 'Dudu';`
-
-    //     var porcAdemir = `SELECT 
-    //     (COUNT(*) / (SELECT COUNT(*) FROM Quizidolo)) * 100 AS porcentagem
-    // FROM Quizidolo
-    // WHERE idolo = 'Ademir da Guia';`
-
     return database.executar(instrucaoSql)
 }
 

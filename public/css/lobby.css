@@ -15,11 +15,6 @@ body {
     padding: 0 20px;
 }
 
-header {
-    background-color: #F6EEDF;
-    padding: 20px 0;
-}
-
 .nav {
     display: flex;
     flex-direction: column;
